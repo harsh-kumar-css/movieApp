@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.tasks.factory.registerTask
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -67,3 +69,17 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
+//tasks.register<Copy>("copyApk"){
+//        println("heloooooo")
+//    val sourceDir = layout.buildDirectory.dir("outputs/apk/debug/app-debug.apk")
+//    val destDir = "$rootDir/apk"
+//
+//    from(sourceDir)
+//    into(destDir)
+//    rename("app-debug.apk","copied-app-debug.apk")
+//}
+//
+//tasks.named("assemble") {
+//    finalizedBy("copyApk") // Run copyApk after build
+//}

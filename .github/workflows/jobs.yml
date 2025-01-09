@@ -34,3 +34,19 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name : Checkout the code
+        uses: actions/checkout@v4
+
+      - name : Run Lint
+        run : ./gradlew lintDebug
+
+      - name : Upload the lint html report
+        uses : actions/upload-artifact@v2
+        with :
+          name : lintReport.html
+          path : app/build/reports/lint-results-debug.html
+
