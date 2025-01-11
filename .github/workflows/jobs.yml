@@ -90,8 +90,7 @@ jobs:
 #        with:
 #          name: jacocoTestReport.xml
   #          path: app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
-  build:
-    name: Build and analyze
+  build-and-analyze:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4  # Checkout code
