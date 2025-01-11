@@ -5,24 +5,24 @@ plugins {
     id("org.sonarqube") version "4.3.0.3225"
 }
 
-sonarqube {
-    properties {
-        property("sonar.projectKey", "harsh-kumar-css") // Replace with your actual project key
-        property("sonar.organization", "harsh-kumar-css") // Replace with your organization key
-
-        // Specify sources to analyze
-        property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.coverage.jacoco.xmlReportPaths", "${project(":app").buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
-        property("sonar.gradle.skipCompile", "true") // Skip compile tasks
-
-        property("sonar.mainSources", "app/src/main/java")
-
-        // Define the test source folder (app/src/test/java and app/src/androidTest/java)
-        property("sonar.testSources", "app/src/test/java, app/src/androidTest/java")
-
-        // Exclude unnecessary files (e.g., activities, fragments, resources) from main sources
-        property("sonar.exclusions", "**/*Activity.kt, **/*Fragment.kt, app/src/main/res/**/*, app/src/main/java/com/example/movieapp/ui/theme/**/*, **/*.xml, **/build.gradle.kts")
-
-        property("sonar.test.exclusions", "**/*Activity.kt, **/*Fragment.kt, **/*.xml")
-    }
-}
+//sonarqube {
+//    properties {
+//        property("sonar.projectKey", "harsh-kumar-css") // Replace with your actual project key
+//        property("sonar.organization", "harsh-kumar-css") // Replace with your organization key
+//
+//        // Specify sources to analyze
+//        property("sonar.host.url", "https://sonarcloud.io")
+//        property("sonar.coverage.jacoco.xmlReportPaths", "${project(":app").buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
+//        property("sonar.gradle.skipCompile", "true") // Skip compile tasks
+//
+//        property("sonar.mainSources", "app/src/main/java")
+//
+//        // Define the test source folder (app/src/test/java and app/src/androidTest/java)
+//        property("sonar.testSources", "app/src/test/java, app/src/androidTest/java")
+//
+//        // Exclude unnecessary files (e.g., activities, fragments, resources) from main sources
+//        property("sonar.exclusions", "**/*Activity.kt, **/*Fragment.kt, app/src/main/res/**/*, app/src/main/java/com/example/movieapp/ui/theme/**/*, **/*.xml, **/build.gradle.kts")
+//
+//        property("sonar.test.exclusions", "**/*Activity.kt, **/*Fragment.kt, **/*.xml")
+//    }
+//}
