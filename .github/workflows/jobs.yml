@@ -67,14 +67,12 @@ jobs:
 #          name: testReport.html
 #          path: app/build/reports/tests/testDebugUnitTest/
 
-  sonarqube:
+  sonar-code-analysis:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: SonarQubeScan
-        uses: SonarSource/sonarqube-scan-action@v4
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: SonarCloud Scan
+        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
