@@ -70,7 +70,7 @@ jobs:
   sonar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Run Gradle tasks
@@ -84,7 +84,7 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
         env:
-          SONAR_TOKEN: "9566389c9d888edb19086133e94270679b735695"
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Upload test report
         uses: actions/upload-artifact@v4
         with:
