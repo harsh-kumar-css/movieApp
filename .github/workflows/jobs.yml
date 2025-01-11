@@ -75,15 +75,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: SonarQubeScan
+      - name: Generate JaCoCo Test Report
+        run: ./gradlew test jacocoTestReport
+
+      # Step 5: Run SonarQube Analysis
+      - name: Run SonarQube Analysis
         uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Run tests and generate coverage
-        run:  ./gradlew testDebugUnitTest jacocoTestReport
-
-      - name: SonarCloud Scan
-        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=harsh-kumar-css
+            -Dsonar.organization=harsh-kumar-css
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+            -Dsonar.gradle.skipCompile=true
+            -Dsonar.sources=app/src/main/java
+            -Dsonar.tests=app/src/test/java,app/src/androidTest/java
+            -Dsonar.exclusions=**/*Activity.kt,**/*Fragment.kt,app/src/main/res/**/*,app/src/main/java/com/example/movieapp/ui/theme/**/*,**/*.xml,**/build.gradle.kts
+            -Dsonar.test.exclusions=**/*Activity.kt,**/*Fragment.kt,**/*.xml
