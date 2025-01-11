@@ -95,6 +95,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4  # Checkout code
+
+      # Step to delete the debug.keystore.lock file if it exists
+      - name: Delete debug.keystore.lock if exists
+        run: |
+          if [ -f "$HOME/.android/debug.keystore.lock" ]; then
+            echo "Deleting debug.keystore.lock file"
+            rm "$HOME/.android/debug.keystore.lock"
+          fi
+
+      # Build and analyze step
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
