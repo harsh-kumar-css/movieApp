@@ -20,11 +20,4 @@ class Dummy {
         return newX+newY+10
     }
 
-    fun dummyFunction4( ) : Int{
-       return 3+3+3
-    }
-
-    fun dummyFunction5( x : Int, y : Int) : Int{
-        return 898+x+y
-    }
 }
