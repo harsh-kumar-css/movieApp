@@ -9,20 +9,14 @@ class Dummy {
     }
 
     fun dummyFunction2( x : Int, y : Int) : Int{
-        val newX = x*20
-        val newY = y*20
-        return newX+newY+10
+        return 0
     }
 
     fun dummyFunction3( x : Int, y : Int) : Int{
-        val newX = x*20
-        val newY = y*20
-        return newX+newY+10
+        return 2*3
     }
 
     fun dummyFunction4( x : Int, y : Int) : Int{
-        val newX = x*20
-        val newY = y*20
-        return newX+newY+10
+       return 3+3+3
     }
 }
