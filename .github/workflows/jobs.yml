@@ -76,7 +76,7 @@ jobs:
           fetch-depth: 0
 
       - name: Generate JaCoCo Test Report
-        run: ./gradlew test jacocoTestReport
+        run: ./gradlew testDebugUnitTest jacocoTestReport
 
       # Step 5: Run SonarQube Analysis
       - name: Run SonarQube Analysis
