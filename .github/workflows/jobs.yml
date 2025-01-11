@@ -82,10 +82,11 @@ jobs:
             -Dsonar.projectKey=harsh-kumar-css
             -Dsonar.organization=harsh-kumar-css
             -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.coverage.jacoco.xmlReportPaths=**/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+            -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: SonarCloud Scan
-        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: "9566389c9d888edb19086133e94270679b735695"
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacocoTestReport.xml
+          path: app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
