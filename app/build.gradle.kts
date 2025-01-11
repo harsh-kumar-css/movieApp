@@ -27,6 +27,16 @@ android {
         }
     }
 
+    signingConfigs {
+        // Modify the existing 'debug' signing configuration
+        getByName("debug") {
+            storeFile = file(System.getenv("HOME") + "/.android/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -73,6 +83,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation("org.bouncycastle:bcprov-jdk15on:1.70")
 }
 
 //tasks.register<Copy>("copyApk"){
