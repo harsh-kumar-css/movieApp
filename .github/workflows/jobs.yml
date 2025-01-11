@@ -85,3 +85,7 @@ jobs:
             -Dsonar.coverage.jacoco.xmlReportPaths=**/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud Scan
+        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
