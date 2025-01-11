@@ -67,26 +67,54 @@ jobs:
 #          name: testReport.html
 #          path: app/build/reports/tests/testDebugUnitTest/
 
-  sonar:
+#  sonar:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+#      - name: Run Gradle tasks
+#        run: ./gradlew testDebugUnitTest jacocoTestReport
+#      - name: SonarCloud Scan
+#        uses: SonarSource/sonarqube-scan-action@v4
+#        with:
+#          args: >
+#            -Dsonar.projectKey=harsh-kumar-css
+#            -Dsonar.organization=harsh-kumar-css
+#            -Dsonar.host.url=https://sonarcloud.io
+#            -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+#        env:
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      - name: Upload test report
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: jacocoTestReport.xml
+#          path: app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+  build:
+    name: Build and analyze
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Run Gradle tasks
-        run: ./gradlew testDebugUnitTest jacocoTestReport
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
-          args: >
-            -Dsonar.projectKey=harsh-kumar-css
-            -Dsonar.organization=harsh-kumar-css
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+          java-version: 17
+          distribution: 'zulu' # Alternative distribution options are available
+      - name: Cache SonarQube packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+      - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: Upload test report
-        uses: actions/upload-artifact@v4
-        with:
-          name: jacocoTestReport.xml
-          path: app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+        run: ./gradlew build sonar --info
