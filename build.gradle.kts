@@ -24,5 +24,6 @@ sonar {
         property("sonar.exclusions", "**/*Activity.kt, **/*Fragment.kt, app/src/main/res/**/*, app/src/main/java/com/example/movieapp/ui/theme/**/*, **/*.xml, **/build.gradle.kts")
 
         property("sonar.test.exclusions", "**/*Activity.kt, **/*Fragment.kt, **/*.xml")
+        property("sonar.login","5c297a4615cbecd0025916962530ff0c1414b5a0")
     }
 }
