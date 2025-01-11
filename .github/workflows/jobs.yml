@@ -67,30 +67,21 @@ jobs:
 #          name: testReport.html
 #          path: app/build/reports/tests/testDebugUnitTest/
 
-  sonar-code-analysis:
+  sonar:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      - name: Generate JaCoCo Test Report
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Run Gradle tasks
         run: ./gradlew testDebugUnitTest jacocoTestReport
-
-      # Step 5: Run SonarQube Analysis
-      - name: Run SonarQube Analysis
+      - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v4
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
             -Dsonar.projectKey=harsh-kumar-css
             -Dsonar.organization=harsh-kumar-css
             -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
-            -Dsonar.gradle.skipCompile=true
-            -Dsonar.sources=app/src/main/java
-            -Dsonar.tests=app/src/test/java,app/src/androidTest/java
-            -Dsonar.exclusions=**/*Activity.kt,**/*Fragment.kt,app/src/main/res/**/*,app/src/main/java/com/example/movieapp/ui/theme/**/*,**/*.xml,**/build.gradle.kts
-            -Dsonar.test.exclusions=**/*Activity.kt,**/*Fragment.kt,**/*.xml
+            -Dsonar.coverage.jacoco.xmlReportPaths=**/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

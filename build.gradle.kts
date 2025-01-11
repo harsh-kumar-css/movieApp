@@ -2,10 +2,10 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
-    id("org.sonarqube") version "4.3.0.3225"
+    id("org.sonarqube") version "6.0.1.5171"
 }
 
-sonarqube {
+sonar {
     properties {
         property("sonar.projectKey", "harsh-kumar-css") // Replace with your actual project key
         property("sonar.organization", "harsh-kumar-css") // Replace with your organization key
