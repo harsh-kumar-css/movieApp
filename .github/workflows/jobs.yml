@@ -73,6 +73,9 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
 
+      - name: Run tests and generate coverage
+        run: ./gradlew test jacocoTestReport
+
       - name: SonarCloud Scan
-        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew sonarqube -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
