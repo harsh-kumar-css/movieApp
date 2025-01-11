@@ -3,6 +3,11 @@ import com.android.build.gradle.internal.tasks.factory.registerTask
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("jacoco")
+}
+
+jacoco {
+    toolVersion = "0.8.8"
 }
 
 android {
@@ -83,3 +88,28 @@ dependencies {
 //tasks.named("assemble") {
 //    finalizedBy("copyApk") // Run copyApk after build
 //}
+
+
+tasks.register<JacocoReport>("jacocoTestReport") {
+    dependsOn(tasks.named("testDebugUnitTest")) // Run tests before generating the report
+
+    reports {
+        xml.required.set(true)  // Required for SonarCloud
+        html.required.set(false)
+        csv.required.set(false)
+    }
+
+    val fileFilter = listOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*", "**/*Test*.*")
+    val debugTree = fileTree("${buildDir}/intermediates/javac/debug") {
+        exclude(fileFilter)
+    }
+    val kotlinDebugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
+
+    sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
+    classDirectories.setFrom(files(debugTree, kotlinDebugTree))
+    executionData.setFrom(fileTree(buildDir) {
+        include("**/*.exec", "**/*.ec")
+    })
+}
