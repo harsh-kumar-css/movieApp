@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [ "main" , "master"]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" , "master" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -75,10 +75,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: master
 
       - name: Fetch target branch
-        run: git fetch origin ${GITHUB_REF#refs/heads/}:refs/remotes/origin/${GITHUB_REF#refs/heads/}
+        run: git fetch origin master
 
       - name: Build and Run Tests
         run: ./gradlew testDebugUnitTest jacocoTestReport
