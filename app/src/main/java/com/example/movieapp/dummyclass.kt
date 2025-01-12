@@ -1,26 +1,53 @@
 package com.example.movieapp
 
-class Dummy {
+class BadCodeExample {
 
-     fun dummyFunction( x : Int, y : Int) : Int{
-        val newX = x*20
-        val newY = y*20
-         return newX+newY+10
+    // Hardcoded credentials (security vulnerability)
+    val username = "admin"
+    val password = "password123"
+
+    // Unused constant (code smell)
+    companion object {
+        const val UNUSED_CONSTANT = "Not used anywhere"
     }
 
-    fun newfunc() : Int{
-        return 9
+    // Magic numbers (maintainability issue)
+    fun calculateDiscount(price: Double): Double {
+        return price * 0.15 // Discount is hardcoded
     }
 
-    fun newfunc2() : Int{
-        return 9
+    // Function with high cyclomatic complexity
+    fun deeplyNestedLogic(input: Int): String {
+        if (input > 0) {
+            if (input < 10) {
+                if (input % 2 == 0) {
+                    return "Input is a small even number"
+                } else {
+                    return "Input is a small odd number"
+                }
+            } else {
+                if (input % 2 == 0) {
+                    return "Input is a large even number"
+                } else {
+                    return "Input is a large odd number"
+                }
+            }
+        } else {
+            return "Input is zero or negative"
+        }
     }
 
-    fun newfunc3() : Int{
-        return 90
+    // Empty catch block (error handling issue)
+    fun riskyOperationWrapper() {
+        try {
+            riskyOperation()
+        } catch (e: Exception) {
+            // No handling or logging
+        }
     }
 
-    fun newfunc4() : Int{
-        return 99
+    private fun riskyOperation() {
+        // Simulate risky operation
+        throw Exception("Something went wrong")
     }
 }
