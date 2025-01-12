@@ -84,6 +84,7 @@ tasks.register<JacocoReport>("jacocoTestReport") {
 
     reports {
         xml.required.set(true)  // Required for SonarCloud
+        xml.outputLocation.set(file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml"))
         html.required.set(false)
         csv.required.set(false)
     }
