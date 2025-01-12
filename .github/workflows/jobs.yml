@@ -36,56 +36,77 @@ jobs:
 #          echo Add other actions to build,
 #          echo test, and deploy your project.
 
-  lint:
+#  lint:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout the code
+#        uses: actions/checkout@v4
+#
+#      - name: Run Lint
+#        run: ./gradlew lintDebug
+#
+#      - name: Upload lint report
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: lintReport.html
+#          path: app/build/reports/lint-results-debug.html
+#
+#  unit-test:
+#    needs: [lint]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout the code
+#        uses: actions/checkout@v4
+#
+#      - name: Run tests
+#        run: ./gradlew test
+#
+#      - name: Upload test report
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: testReport.html
+#          path: app/build/reports/tests/testDebugUnitTest/
+
+  sonar-analysis:
+#    needs: [unit-test]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the code
+      # as you can see, the name is optional
+      - name: Checkout Code
         uses: actions/checkout@v4
-
-      - name: Run Lint
-        run: ./gradlew lintDebug
-
-      - name: Upload lint report
-        uses: actions/upload-artifact@v4
         with:
-          name: lintReport.html
-          path: app/build/reports/lint-results-debug.html
+          ref: main
 
-  unit-test:
-    needs: [lint]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the code
-        uses: actions/checkout@v4
+      - name: Fetch target branch
+        run: git fetch origin ${GITHUB_REF#refs/heads/}:refs/remotes/origin/${GITHUB_REF#refs/heads/}
 
-      - name: Run tests
-        run: ./gradlew test
+      - name: Build and Run Tests
+        run: ./gradlew testDebugUnitTest jacocoTestReport
 
-      - name: Upload test report
-        uses: actions/upload-artifact@v4
-        with:
-          name: testReport.html
-          path: app/build/reports/tests/testDebugUnitTest/
+#      - name: Run Lint
+#        run: ./gradlew lint
 
-#  sonar-analysis:
+      - name: Debug Reports
+        run: ls -R app/build/reports/
+
+      - name: SonarCloud Scan
+        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#  package:
+##    needs: [unit-test]
 #    runs-on: ubuntu-latest
 #    steps:
 #      # as you can see, the name is optional
 #      - name: Checkout Code
 #        uses: actions/checkout@v4
+#
+#      - name: Build debug apk
+#        run: ./gradlew assembleDebug --stacktrace
+#
+#      - name: Upload APK
+#        uses: actions/upload-artifact@v4
 #        with:
-#          fetch-depth: 0
-#
-#      - name: Build and Run Tests
-#        run: ./gradlew testDebugUnitTest jacocoTestReport
-#
-#      - name: Run Lint
-#        run: ./gradlew lint
-#
-#      - name: Debug Reports
-#        run: ls -R app/build/reports/
-#
-#      - name: SonarCloud Scan
-#        run: ./gradlew sonar
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          name: app-debug.apk
+#          path: app/build/outputs/apk/debug/app-debug.apk
