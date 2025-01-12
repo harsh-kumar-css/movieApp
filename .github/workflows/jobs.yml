@@ -95,14 +95,8 @@ jobs:
 
     steps:
       # as you can see, the name is optional
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-
       - name: Checkout Code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
 
       - name: Build and Run Tests
         run: ./gradlew testDebugUnitTest jacocoTestReport
