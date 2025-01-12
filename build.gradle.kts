@@ -21,6 +21,8 @@ sonar {
         property("sonar.gradle.skipCompile", "true") // Skip compile tasks
         property("sonar.branch.name", "master")
         property("sonar.mainSources", "app/src/main/java")
+        property("sonar.qualitygate.wait", "true")
+        property("sonar.qualitygate.timeout", "600")
 
         // Define the test source folder (app/src/test/java and app/src/androidTest/java)
         property("sonar.testSources", "app/src/test/java, app/src/androidTest/java")
