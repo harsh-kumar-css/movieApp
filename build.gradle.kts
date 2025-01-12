@@ -3,6 +3,11 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     id("org.sonarqube") version "6.0.1.5171"
+    id("jacoco")
+}
+
+jacoco {
+    toolVersion = "0.8.8"
 }
 
 sonar {
