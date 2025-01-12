@@ -3,11 +3,11 @@ import com.android.build.gradle.internal.tasks.factory.registerTask
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("jacoco")
+    jacoco
 }
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.12"
 }
 
 android {
@@ -80,7 +80,7 @@ dependencies {
 }
 
 tasks.register<JacocoReport>("jacocoTestReport") {
-    dependsOn(tasks.named("testDebugUnitTest")) // Run tests before generating the report
+    dependsOn(tasks.named("compileDebugJavaWithJavac"), tasks.named("compileDebugKotlin"), tasks.named("compileDebugKotlin"), tasks.named("generateDebugResValues"))
 
     reports {
         xml.required.set(true)  // Required for SonarCloud

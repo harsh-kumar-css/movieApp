@@ -15,4 +15,12 @@ class Dummy {
     fun newfunc2() : Int{
         return 9
     }
+
+    fun newfunc3() : Int{
+        return 90
+    }
+
+    fun newfunc4() : Int{
+        return 99
+    }
 }

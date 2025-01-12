@@ -3,11 +3,11 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     id("org.sonarqube") version "6.0.1.5171"
-    id("jacoco")
+    jacoco
 }
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.12"
 }
 
 sonar {
@@ -17,7 +17,6 @@ sonar {
 
         // Specify sources to analyze
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.coverage.jacoco.xmlReportPaths", "${rootProject.buildDir}/reports/jacoco/test/jacocoTestReport.xml")
         property("sonar.gradle.skipCompile", "true") // Skip compile tasks
 
         property("sonar.mainSources", "app/src/main/java")
