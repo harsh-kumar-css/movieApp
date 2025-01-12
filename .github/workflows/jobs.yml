@@ -99,4 +99,4 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew testDebugUnitTest jacocoTestReport sonar
+        run: ./gradlew build sonar --info
