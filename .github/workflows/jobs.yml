@@ -117,7 +117,7 @@ jobs:
         run: |
           ./gradlew sonar \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml \
+            -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml \
             -Dsonar.androidLint.reportPaths=app/build/reports/lint-results-debug.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
