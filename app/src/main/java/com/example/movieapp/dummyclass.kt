@@ -15,12 +15,4 @@ class Dummy {
     fun dummyFunction3( x : Int, y : Int) : Int{
         return x+x+y
     }
-
-    fun dummyFunction4( ) : Int{
-       return 3+3+3
-    }
-
-    fun dummyFunction5( x : Int, y : Int) : Int{
-        return 898+x+y
-    }
 }

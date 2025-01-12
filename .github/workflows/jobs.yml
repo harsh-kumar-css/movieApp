@@ -90,10 +90,18 @@ jobs:
 #        with:
 #          name: jacocoTestReport.xml
   #          path: app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
-  build-and-analyze:
+  sonar-analysis:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4  # Checkout code
+
+      # Decode and set up debug keystore
+      - name: Decode and Set Up Debug Keystore
+        run: |
+          mkdir -p ~/.android
+          echo "${{ secrets.DEBUG_KEYSTORE }}" | base64 --decode > ~/.android/debug.keystore
+
+      # Build and analyze
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
