@@ -100,9 +100,6 @@ jobs:
       - name: Run tests
         run: ./gradlew testDebugUnitTest
 
-      - name: Create necessary directories
-        run: mkdir -p build/reports/jacoco
-
       - name: Generate Jacoco report
         run: ./gradlew jacocoTestReport
 
