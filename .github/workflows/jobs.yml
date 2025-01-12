@@ -108,6 +108,6 @@ jobs:
         run: ls -R app/build/reports/
 
       - name: SonarCloud Scan
-        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dsonar.branch.name=main
+        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dsonar.branch.name=main -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
