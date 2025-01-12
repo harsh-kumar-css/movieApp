@@ -17,10 +17,10 @@ sonar {
 
         // Specify sources to analyze
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${rootProject.buildDir}/reports/jacoco/test/jacocoTestReport.xml")
         property("sonar.gradle.skipCompile", "true") // Skip compile tasks
 
         property("sonar.mainSources", "app/src/main/java")
-        property("sonar.branch.name", System.getenv("GITHUB_REF_NAME") ?: "main")
 
         // Define the test source folder (app/src/test/java and app/src/androidTest/java)
         property("sonar.testSources", "app/src/test/java, app/src/androidTest/java")
