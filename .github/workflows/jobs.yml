@@ -75,10 +75,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          ref: main
-
-      - name: Fetch target branch
-        run: git fetch origin main
+          ref: master
 
       - name: Fetch target branch
         run: git fetch origin master
