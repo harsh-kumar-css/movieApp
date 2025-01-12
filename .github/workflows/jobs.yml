@@ -95,18 +95,28 @@ jobs:
 
     steps:
       # as you can see, the name is optional
-      - uses: actions/checkout@v4  # still, it is a good practice to use it.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
-      - name: Run tests
-        run: ./gradlew testDebugUnitTest
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
-      - name: Generate Jacoco report
-        run: ./gradlew jacocoTestReport
+      - name: Build and Run Tests
+        run: ./gradlew testDebugUnitTest jacocoTestReport
 
-      - name: List files in build directory
-        run: ls -R app/build/reports/jacoco/
+      - name: Run Lint
+        run: ./gradlew lint
+
+      - name: Debug Reports
+        run: ls -R app/build/reports/
 
       - name: SonarCloud Scan
-        run: ./gradlew sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+        run: ./gradlew sonar \
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml \
+          -Dsonar.androidLint.reportPaths=app/build/reports/lint-results-debug.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
