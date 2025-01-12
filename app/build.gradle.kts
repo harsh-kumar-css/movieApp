@@ -79,21 +79,6 @@ dependencies {
     implementation("org.bouncycastle:bcprov-jdk15on:1.70")
 }
 
-//tasks.register<Copy>("copyApk"){
-//        println("heloooooo")
-//    val sourceDir = layout.buildDirectory.dir("outputs/apk/debug/app-debug.apk")
-//    val destDir = "$rootDir/apk"
-//
-//    from(sourceDir)
-//    into(destDir)
-//    rename("app-debug.apk","copied-app-debug.apk")
-//}
-//
-//tasks.named("assemble") {
-//    finalizedBy("copyApk") // Run copyApk after build
-//}
-
-
 tasks.register<JacocoReport>("jacocoTestReport") {
     dependsOn(tasks.named("testDebugUnitTest")) // Run tests before generating the report
 
