@@ -68,7 +68,7 @@ jobs:
 #          path: app/build/reports/tests/testDebugUnitTest/
 
   sonar-analysis:
-    needs: [unit-test]
+#    needs: [unit-test]
     runs-on: ubuntu-latest
     steps:
       # as you can see, the name is optional
