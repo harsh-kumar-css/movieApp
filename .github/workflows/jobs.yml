@@ -80,6 +80,9 @@ jobs:
       - name: Fetch target branch
         run: git fetch origin main
 
+      - name: Fetch target branch
+        run: git fetch origin master
+
       - name: Build and Run Tests
         run: ./gradlew testDebugUnitTest jacocoTestReport
 
