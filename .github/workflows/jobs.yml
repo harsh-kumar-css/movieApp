@@ -77,17 +77,17 @@ jobs:
         with:
           ref: main
 
-#      - name: Build and Run Tests
-#        run: ./gradlew testDebugUnitTest jacocoTestReport
-#
+      - name: Build and Run Tests
+        run: ./gradlew testDebugUnitTest jacocoTestReport
+
 #      - name: Run Lint
 #        run: ./gradlew lint
-#
+
       - name: Debug Reports
         run: ls -R app/build/reports/
 
       - name: SonarCloud Scan
-        run: ./gradlew testDebugUnitTest jacocoTestReport sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
