@@ -50,4 +50,34 @@ class BadCodeExample {
         // Simulate risky operation
         throw Exception("Something went wrong")
     }
+
+    fun duplicateCodeExample(value: Int): String {
+        return if (value % 2 == 0) {
+            "Even number"
+        } else {
+            "Odd number"
+        }
+    }
+
+    fun anotherDuplicateCodeExample(value: Int): String {
+        return if (value % 2 == 0) {
+            "Even number"
+        } else {
+            "Odd number"
+        }
+    }
+
+    // Long function (violates SRP)
+    fun longFunction(input: String) {
+        println("Step 1: Processing $input")
+        println("Step 2: Validating $input")
+        println("Step 3: Transforming $input")
+        println("Step 4: Storing $input")
+    }
+
+    // Inconsistent naming (maintainability issue)
+    fun CalculateVALUE(input: Double): Double {
+        return input * 2
+    }
+
 }
