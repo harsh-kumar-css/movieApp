@@ -36,80 +36,57 @@ jobs:
 #          echo Add other actions to build,
 #          echo test, and deploy your project.
 
-#  lint:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout the code
-#        uses: actions/checkout@v4
-#
-#      - name: Run Lint
-#        run: ./gradlew lintDebug
-#
-#      - name: Upload lint report
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: lintReport.html
-#          path: app/build/reports/lint-results-debug.html
-#
-#  unit-test:
-#    needs: [lint]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout the code
-#        uses: actions/checkout@v4
-#
-#      - name: Run tests
-#        run: ./gradlew test
-#
-#      - name: Upload test report
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: testReport.html
-#          path: app/build/reports/tests/testDebugUnitTest/
-
-#  sonar:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#        with:
-#          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-#      - name: Run Gradle tasks
-#        run: ./gradlew testDebugUnitTest jacocoTestReport
-#      - name: SonarCloud Scan
-#        uses: SonarSource/sonarqube-scan-action@v4
-#        with:
-#          args: >
-#            -Dsonar.projectKey=harsh-kumar-css
-#            -Dsonar.organization=harsh-kumar-css
-#            -Dsonar.host.url=https://sonarcloud.io
-#            -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
-#        env:
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#      - name: Upload test report
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: jacocoTestReport.xml
-  #          path: app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
-  sonar-analysis:
+  lint:
     runs-on: ubuntu-latest
-
     steps:
-      # as you can see, the name is optional
-      - name: Checkout Code
+      - name: Checkout the code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Build and Run Tests
-        run: ./gradlew testDebugUnitTest jacocoTestReport
 
       - name: Run Lint
-        run: ./gradlew lint
+        run: ./gradlew lintDebug
 
-      - name: Debug Reports
-        run: ls -R app/build/reports/
+      - name: Upload lint report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lintReport.html
+          path: app/build/reports/lint-results-debug.html
 
-      - name: SonarCloud Scan
-        run: ./gradlew sonar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  unit-test:
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Run tests
+        run: ./gradlew test
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: testReport.html
+          path: app/build/reports/tests/testDebugUnitTest/
+
+#  sonar-analysis:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      # as you can see, the name is optional
+#      - name: Checkout Code
+#        uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#
+#      - name: Build and Run Tests
+#        run: ./gradlew testDebugUnitTest jacocoTestReport
+#
+#      - name: Run Lint
+#        run: ./gradlew lint
+#
+#      - name: Debug Reports
+#        run: ls -R app/build/reports/
+#
+#      - name: SonarCloud Scan
+#        run: ./gradlew sonar
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
