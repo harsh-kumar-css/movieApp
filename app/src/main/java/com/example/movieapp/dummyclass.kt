@@ -7,4 +7,8 @@ class Dummy {
         val newY = y*20
          return newX+newY+10
     }
+
+    fun newfunc() : Int{
+        return 9
+    }
 }
