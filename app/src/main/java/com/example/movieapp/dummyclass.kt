@@ -84,4 +84,11 @@ class BadCodeExample {
         return input * 2
     }
 
+    fun longFunction22(input: String) {
+        println("Step 1: Processing $input")
+        println("Step 2: Validating $input")
+        println("Step 3: Transforming $input")
+        println("Step 4: Storing $input")
+    }
+
 }
