@@ -67,26 +67,26 @@ jobs:
           name: testReport.html
           path: app/build/reports/tests/testDebugUnitTest/
 
-#  sonar-analysis:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      # as you can see, the name is optional
-#      - name: Checkout Code
-#        uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 0
-#
-#      - name: Build and Run Tests
-#        run: ./gradlew testDebugUnitTest jacocoTestReport
-#
-#      - name: Run Lint
-#        run: ./gradlew lint
-#
-#      - name: Debug Reports
-#        run: ls -R app/build/reports/
-#
-#      - name: SonarCloud Scan
-#        run: ./gradlew sonar
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  sonar-analysis:
+    needs: [unit-test]
+    runs-on: ubuntu-latest
+    steps:
+      # as you can see, the name is optional
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build and Run Tests
+        run: ./gradlew testDebugUnitTest jacocoTestReport
+
+      - name: Run Lint
+        run: ./gradlew lint
+
+      - name: Debug Reports
+        run: ls -R app/build/reports/
+
+      - name: SonarCloud Scan
+        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
