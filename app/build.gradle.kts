@@ -36,7 +36,7 @@ android {
             )
         }
         debug{
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = null
         }
     }
     compileOptions {
@@ -80,7 +80,7 @@ dependencies {
 }
 
 tasks.register<JacocoReport>("jacocoTestReport") {
-    dependsOn(tasks.named("compileDebugJavaWithJavac"), tasks.named("compileDebugKotlin"), tasks.named("compileDebugKotlin"), tasks.named("generateDebugResValues"))
+    dependsOn(tasks.named("testDebugUnitTest")) // Run tests before generating the report
 
     reports {
         xml.required.set(true)  // Required for SonarCloud

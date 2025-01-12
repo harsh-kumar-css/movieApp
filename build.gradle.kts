@@ -17,6 +17,7 @@ sonar {
 
         // Specify sources to analyze
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.coverage.jacoco.xmlReportPaths", "app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
         property("sonar.gradle.skipCompile", "true") // Skip compile tasks
 
         property("sonar.mainSources", "app/src/main/java")
