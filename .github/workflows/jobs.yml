@@ -101,7 +101,7 @@ jobs:
           fetch-depth: 0
 
       - name: Fetch the main branch
-        run: it fetch --all
+        run: git fetch --all
 
       - name: Build and Run Tests
         run: ./gradlew testDebugUnitTest jacocoTestReport
