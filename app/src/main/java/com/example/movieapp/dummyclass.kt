@@ -27,12 +27,4 @@ class Dummy {
     fun dummyFunction6( x : Int, y : Int) : Int{
         return x+x+y+x
     }
-
-    fun dummyFunction7( ) : Int{
-        return 3+3+3+5
-    }
-
-    fun dummyFunction8( x : Int, y : Int) : Int{
-        return 898+x+y+x
-    }
 }
