@@ -11,4 +11,8 @@ class Dummy {
     fun newfunc() : Int{
         return 9
     }
+
+    fun newfunc2() : Int{
+        return 9
+    }
 }
