@@ -21,6 +21,8 @@ sonar {
         property("sonar.gradle.skipCompile", "true") // Skip compile tasks
         property("sonar.branch.name", System.getenv("GITHUB_HEAD_REF"))
         property("sonar.mainSources", "app/src/main/java")
+        property("sonar.qualitygate.wait", "true")
+        property("sonar.qualitygate.timeout", "600")
 
         // Define the test source folder (app/src/test/java and app/src/androidTest/java)
         property("sonar.testSources", "app/src/test/java, app/src/androidTest/java")
@@ -29,5 +31,6 @@ sonar {
         property("sonar.exclusions", "**/*Activity.kt, **/*Fragment.kt, app/src/main/res/**/*, app/src/main/java/com/example/movieapp/ui/theme/**/*, **/*.xml, **/build.gradle.kts")
 
         property("sonar.test.exclusions", "**/*Activity.kt, **/*Fragment.kt, **/*.xml")
+
     }
 }
