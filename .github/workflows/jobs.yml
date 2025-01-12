@@ -97,6 +97,8 @@ jobs:
       # as you can see, the name is optional
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Build and Run Tests
         run: ./gradlew testDebugUnitTest jacocoTestReport
