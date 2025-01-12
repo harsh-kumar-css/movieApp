@@ -77,8 +77,8 @@ jobs:
         with:
           ref: main
 
-      - name: Fetch target branch
-        run: git fetch origin ${GITHUB_REF#refs/heads/}:refs/remotes/origin/${GITHUB_REF#refs/heads/}
+      - name: Fetch Target Branch
+        run: git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
 
       - name: Build and Run Tests
         run: ./gradlew testDebugUnitTest jacocoTestReport
