@@ -80,4 +80,8 @@ class BadCodeExample {
         return input * 2
     }
 
+    fun CalculateVALUENew(input: Double): Double {
+        return input * 2
+    }
+
 }
