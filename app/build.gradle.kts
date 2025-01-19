@@ -3,6 +3,10 @@ import com.android.build.gradle.internal.tasks.factory.registerTask
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.jetbrains.kotlin.serialization) // serialization for type safe navigation
+    alias(libs.plugins.hilt)             // dagger
+    kotlin("kapt")                      // annotation processing
     jacoco
 }
 
@@ -13,6 +17,10 @@ jacoco {
 android {
     namespace = "com.example.movieapp"
     compileSdk = 34
+
+    buildFeatures{
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.example.movieapp"
@@ -25,6 +33,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String","API_KEY",project.findProperty("API_KEY")?.toString() ?: "")
     }
 
     buildTypes {
@@ -35,9 +45,9 @@ android {
                 "proguard-rules.pro"
             )
         }
-        debug{
-            signingConfig = null
-        }
+//        debug{
+//            signingConfig = null
+//        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -77,6 +87,26 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("org.bouncycastle:bcprov-jdk15on:1.70")
+
+    implementation(libs.androidx.navigation.compose)  // compose navigation
+    implementation(libs.androidx.hilt.navigation.compose)     // use hilt in compose
+    implementation(libs.kotlinx.serialization.json)   // serialization for type safe navigation
+    implementation(libs.coil)                         // coil for image loading
+    implementation(libs.viewModel.compose)            // viewmodel in compose
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.room.runtime)            // room db
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
+    implementation(libs.dagger.hilt.android)           // dagger hilt
+    kapt(libs.dagger.hilt.compiler)                    // hilt annotation processing
+    implementation(libs.paging.runtime)                // paging
+    implementation(libs.paging.compose)
+    implementation(libs.room.paging)
+    implementation(libs.lottie.compose)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
 }
 
 tasks.register<JacocoReport>("jacocoTestReport") {

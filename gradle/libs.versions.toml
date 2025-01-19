@@ -9,6 +9,22 @@ lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
 composeBom = "2023.08.00"
 
+composeNavigation="2.8.0-alpha08"
+serialization="1.6.3"
+googleServices="4.3.15"
+coil="2.2.2"
+firebase="21.1.0"
+gms="20.4.1"
+lifeCycleCompose="2.6.0"
+room = "2.6.1"
+hilt = "2.51.1"
+hilt-navigation-compose="1.0.0"
+paging = "3.1.1"
+pagingCompose = "1.0.0-alpha14"
+lottie-compose = "6.3.0"
+retrofit = "2.9.0"
+firebase-bom = "33.8.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -25,7 +41,34 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose",version.ref="hilt-navigation-compose"}
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+coil = {module = "io.coil-kt:coil-compose",version.ref="coil"}
+firebase-auth = { module = "com.google.firebase:firebase-auth-ktx",version.ref="firebase"}
+firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx", version = "24.6.0" }
+gms-play-services = { module = "com.google.android.gms:play-services-auth",version.ref="gms"}
+viewModel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose",version.ref="lifeCycleCompose"}
+lifecycle-runtime-compose = {module = "androidx.lifecycle:lifecycle-runtime-compose",version.ref="lifeCycleCompose"}
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie-compose" }
+paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
+paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+jetbrains-kotlin-serialization = { id ="org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
