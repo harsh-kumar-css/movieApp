@@ -75,16 +75,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          ref: master
-
-      - name: Fetch target branch
-        run: git fetch origin master
+          ref: ${{ github.base_ref }}
 
       - name: Build and Run Tests
         run: ./gradlew testDebugUnitTest jacocoTestReport
-
-#      - name: Run Lint
-#        run: ./gradlew lint
 
       - name: Debug Reports
         run: ls -R app/build/reports/

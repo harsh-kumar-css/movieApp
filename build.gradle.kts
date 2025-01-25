@@ -2,6 +2,9 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.jetbrains.kotlin.serialization) apply false
+    alias(libs.plugins.google.services) apply false
     id("org.sonarqube") version "6.0.1.5171"
     jacoco
 }
@@ -19,7 +22,7 @@ sonar {
         property("sonar.host.url", "https://sonarcloud.io")
 //        property("sonar.coverage.jacoco.xmlReportPaths", "app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
         property("sonar.gradle.skipCompile", "true") // Skip compile tasks
-        property("sonar.branch.name", "master")
+        property("sonar.branch.name", System.getenv("GITHUB_HEAD_REF"))
         property("sonar.mainSources", "app/src/main/java")
         property("sonar.qualitygate.wait", "true")
         property("sonar.qualitygate.timeout", "600")
