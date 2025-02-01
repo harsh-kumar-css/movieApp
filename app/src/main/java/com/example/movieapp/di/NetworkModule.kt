@@ -1,13 +1,15 @@
 package com.example.movieapp.di
 
-import com.example.movieapp.Constants
+import android.content.Context
+import com.example.movieapp.util.AndroidConnectivityObserver
+import com.example.core.util.ConnectivityObserver
 import com.example.movieapp.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -16,14 +18,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesRetrofit(): Retrofit {
-        return Retrofit.Builder().baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create()).build()
+    fun providesApiService(retrofit: Retrofit) : ApiService{
+        return retrofit.create(ApiService::class.java)
     }
 
     @Provides
     @Singleton
-    fun providesApiService(retrofit: Retrofit) : ApiService{
-        return retrofit.create(ApiService::class.java)
+    fun provideConnectivityObserver(@ApplicationContext context : Context) : ConnectivityObserver {
+        return AndroidConnectivityObserver(context)
     }
 }

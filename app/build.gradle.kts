@@ -60,7 +60,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.7"
     }
     packaging {
         resources {
@@ -71,6 +71,7 @@ android {
 
 dependencies {
 
+    implementation(project(":core"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -103,10 +104,10 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.room.paging)
     implementation(libs.lottie.compose)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
 
 tasks.register<JacocoReport>("jacocoTestReport") {

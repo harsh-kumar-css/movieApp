@@ -46,27 +46,32 @@ class MovieRemoteMediator @Inject constructor(
 
             val movieResponse = movieApi.getMovies(page = page)
 
-            // Perform the database transaction
-            movieDatabase.withTransaction {
-                // Map API response to MovieEntity, include the page number for pagination
-                val movies = movieResponse.movies?.map {
-                    it.toMovieEntity(movieResponse.page)
-                }
+            if(movieResponse.isSuccessful) {
 
-                // Clear previous data on refresh, else append new data
-                if (loadType == LoadType.REFRESH) {
-                    movieDao.deleteMovies()
-                }
+                movieResponse.body()?.let { response ->
+                    // Perform the database transaction
+                    movieDatabase.withTransaction {
+                        // Map API response to MovieEntity, include the page number for pagination
+                        val movies = response.movies?.map {
+                            it.toMovieEntity(response.page)
+                        }
 
-                // Insert new movies into the database
-                movies?.let{movieDao.insertMovies(it)}
+                        // Clear previous data on refresh, else append new data
+                        if (loadType == LoadType.REFRESH) {
+                            movieDao.deleteMovies()
+                        }
+
+                        // Insert new movies into the database
+                        movies?.let { movieDao.insertMovies(it) }
+                    }
+
+                    // Determine if we have reached the end of pagination
+                    val endOfPaginationReached = response.movies?.isEmpty() ?: false
+
+                    return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
+                }
             }
-
-            // Determine if we have reached the end of pagination
-            val endOfPaginationReached = movieResponse.movies?.isEmpty() ?: false
-
-            return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
-
+            return MediatorResult.Success(endOfPaginationReached = true)
         } catch (e: Exception) {
             // If an error occurs, return the error result
             return MediatorResult.Error(e)

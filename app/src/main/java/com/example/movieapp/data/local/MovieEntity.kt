@@ -2,7 +2,7 @@ package com.example.movieapp.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.movieapp.Constants
+import com.example.movieapp.util.Constants
 
 @Entity(tableName = Constants.MOVIES_TABLE)
 data class MovieEntity (

@@ -2,7 +2,7 @@ package com.example.movieapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.movieapp.Constants
+import com.example.movieapp.util.Constants
 import com.example.movieapp.data.local.MovieDatabase
 import dagger.Module
 import dagger.Provides

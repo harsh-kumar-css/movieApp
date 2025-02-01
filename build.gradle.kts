@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization) apply false
     alias(libs.plugins.google.services) apply false
     id("org.sonarqube") version "6.0.1.5171"
+    alias(libs.plugins.android.library) apply false
     jacoco
 }
 

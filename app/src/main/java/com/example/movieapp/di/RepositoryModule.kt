@@ -4,7 +4,6 @@ import com.example.movieapp.data.repository.MovieRepositoryImpl
 import com.example.movieapp.domain.repository.MovieRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
